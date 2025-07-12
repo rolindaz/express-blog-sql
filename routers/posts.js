@@ -21,6 +21,9 @@ router.get('/:id/', postController.show);
 // Post - Store
 router.post('/', postController.store);
 
+// Update - Update
+router.put('/:id/', postController.update);
+
 // Delete - Destroy
 router.delete('/:id/', postController.destroy);
 

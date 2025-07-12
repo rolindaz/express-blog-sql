@@ -59,6 +59,37 @@ const store = (req, res)=>{
     });
 };
 
+// Create UPDATE route function
+
+const update = (req, res)=>{
+    const id = parseInt(req.params.id);
+    console.log('This is the req body: ', req.body);
+    const {title, content, image} = req.body;
+    const sql = 'UPDATE posts SET title = ?, content = ?, image = ? WHERE id = ?;';
+    console.log(sql);
+    connection.query(sql, [title, content, image, id], (err, results)=>{
+        if (err) {
+            errorsHandlerMiddleware();
+        };
+        console.log(results);
+        if (results.affectedRows === 0) {
+            notFoundMiddleware();
+        };
+        const sqlSinglePost = 'SELECT * FROM posts WHERE id = ?;';
+        console.log(sqlSinglePost);
+        connection.query(sqlSinglePost, [id], (err, results)=>{
+            if (err) {
+                errorsHandlerMiddleware();
+            };
+            if (!results.length > 0) {
+                notFoundMiddleware();
+            };
+            console.log(results);
+            return res.json(results[0]);
+        });
+    });
+};
+
 // Create DESTROY route function
 
 const destroy = (req, res)=>{
@@ -83,5 +114,6 @@ module.exports = {
     index,
     show,
     store,
+    update,
     destroy
 };
