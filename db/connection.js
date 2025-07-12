@@ -10,3 +10,13 @@ const credentials = {
 };
 
 const connection = mysql.createConnection(credentials);
+
+// create console.log to verify that connection is up without errors
+connection.connect(err => {
+    if (err) {
+        throw err;
+    };
+    console.info('Connection successful');
+});
+
+module.exports = connection;
