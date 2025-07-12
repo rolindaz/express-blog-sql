@@ -1,20 +1,25 @@
 // import posts list
-
 const connection = require('../db/connection');
+
+// import middleware functions
+const errorsHandlerMiddleware = require('../middlewares/errorsHandler');
+const notFoundMiddleware = require('../middlewares/notFound');
 
 // Create INDEX route function
 
 const index = (req, res) => {
     const sql = 'SELECT * FROM posts';
-    connection.query(sql, (err, results) => {
-        if (err) 
-            return res.status(500).json({
-                error: true,
-                message: err.message
-            });
+    connection.query(sql, (err, results, errorsHandlerMiddleware)=>{
+        if (err) {
+            errorsHandlerMiddleware();
+        };
         console.log(results);
         res.json(results);
     });
 };
+
+// Create SHOW route function
+
+
 
 module.exports = {index};
