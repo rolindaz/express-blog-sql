@@ -16,6 +16,9 @@ const postController = require('../controllers/postController');
 router.get('/', postController.index);
 
 // Read - Show
-router.get('/:id/', postController.show)
+router.get('/:id/', postController.show);
+
+// Delete - Destroy
+router.delete('/:id/', postController.destroy);
 
 module.exports = router;

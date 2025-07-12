@@ -1,6 +1,6 @@
 function errorsHandler(err, req, res, next) {
 	console.log('Something is wrong on the server side');
-	res.status(500).json({
+	return res.status(500).json({
 		error: true,
 		message: err.message
 	});
