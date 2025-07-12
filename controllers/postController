@@ -42,6 +42,23 @@ const show = (req, res) => {
     });
 };
 
+// Create STORE route function
+
+const store = (req, res)=>{
+    console.log('This is the req body: ', req.body);
+    const {title, content, image} = req.body;
+    const sql = 'INSERT INTO posts (title, content, image) VALUES (?, ?, ?);';
+    connection.query(sql, [title, content, image], (err, results)=>{
+        if (err) {
+            errorsHandlerMiddleware();
+        };
+        console.log(results);
+        res.status(201).json({
+            id: results.insertId
+        });
+    });
+};
+
 // Create DESTROY route function
 
 const destroy = (req, res)=>{
@@ -65,5 +82,6 @@ const destroy = (req, res)=>{
 module.exports = {
     index,
     show,
+    store,
     destroy
 };

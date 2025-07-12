@@ -18,6 +18,9 @@ router.get('/', postController.index);
 // Read - Show
 router.get('/:id/', postController.show);
 
+// Post - Store
+router.post('/', postController.store);
+
 // Delete - Destroy
 router.delete('/:id/', postController.destroy);
 
