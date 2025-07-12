@@ -15,4 +15,7 @@ const postController = require('../controllers/postController');
 // Read - Index
 router.get('/', postController.index);
 
+// Read - Show
+router.get('/:id/', postController.show)
+
 module.exports = router;

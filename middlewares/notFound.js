@@ -1,6 +1,6 @@
 function notFound(req, res, next) {
-	res.status(404);
-	res.json({
+	console.log("We couldn't find what you requested");
+	res.status(404).json({
 		error: 'Not Found',
 		message: 'Pagina non trovata'
 	});
