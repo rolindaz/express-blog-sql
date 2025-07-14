@@ -14,22 +14,22 @@ const notFoundMiddleware = require('./middlewares/notFound');
 
 // Set server listener
 
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 // Register body parser for app json
 app.use(express.json());
 
+// Set the middleware to handle problems
+app.use(errorsHandlerMiddleware);
+app.use(notFoundMiddleware);
+
 // Set homepage route
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     console.log('Welcome to the blog!');
     res.send('Welcome to the blog!');
 });
 
 // Point the prefixes for the routes with the use method
 app.use('/api/posts', postRouter);
-
-// Set the middleware to handle problems
-app.use(errorsHandlerMiddleware);
-app.use(notFoundMiddleware);
